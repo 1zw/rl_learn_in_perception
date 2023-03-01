@@ -70,8 +70,8 @@ class ThompsonSampling(agent):
         # contribution2提高系统可探索率
         self.contribution1 = torch.ones(self.K)
         self.contribution2 = torch.ones(self.K)
-        self.d = D.Beta(self.contribution1,self.contribution2)
     def get_action(self):
+        self.d = D.Beta(self.contribution1,self.contribution2)
         a = torch.max(self.d.sample(),0)[1]
         return a
         pass
