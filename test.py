@@ -3,6 +3,8 @@ import numpy as np
 import torch.nn as nn
 import torch.nn.functional as F
 import itertools
+from tensorboardX import SummaryWriter
+writer = SummaryWriter('./runs')
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 class same_net(nn.Module):
     def __init__(self) -> None:
@@ -44,7 +46,7 @@ def print_params(net):
         print(param_tensor, "\t", net.state_dict()[param_tensor])
 
 # print(net_2(x),y2)
-for i in range(1):
+for i in range(100):
     loss_1 = torch.mean(F.mse_loss(net_1(x),y1))
     
     loss_2 = torch.mean(F.mse_loss(net_2(x),y2))
@@ -64,4 +66,7 @@ for i in range(1):
     opt2.step()
     print("**************net2传播后***************")
     print_params(samenet)
-
+# writer.add_graph(net_1, input_to_model=x)
+writer.add_graph(net_2, input_to_model=x)
+# tensorboard --logdir runs
+writer.close()

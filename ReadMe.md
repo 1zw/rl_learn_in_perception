@@ -17,3 +17,4 @@
 1. test中证明了可以写一个类来更新其中的参数
 即实现了actor 和 critic 在cnn层的参数共享
 ```
+![计算图](pics/test.png)
